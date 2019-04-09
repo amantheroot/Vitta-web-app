@@ -31,8 +31,27 @@ CREATE TABLE companies (
   company_financial_year_start DATE NOT NULL,
   company_financial_year_end DATE NOT NULL,
   company_data_dir VARCHAR(100) NOT NULL,
-  company_id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY
-);
+  company_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (company_id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+
+CREATE TABLE customers (
+  customer_name VARCHAR(30) NOT NULL,
+  customer_address VARCHAR(300) NOT NULL,
+  customer_phone VARCHAR(10) NOT NULL,
+  customer_gstin CHAR(15) NOT NULL,
+  customer_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (customer_id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;
+
+CREATE TABLE suppliers (
+  supplier_name VARCHAR(30) NOT NULL,
+  supplier_address VARCHAR(300) NOT NULL,
+  supplier_phone VARCHAR(10) NOT NULL,
+  supplier_gstin CHAR(15) NOT NULL,
+  supplier_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (supplier_id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
 CREATE TABLE products (
   product_status ENUM('CONTINUE', 'CLOSE') NOT NULL,
@@ -78,39 +97,31 @@ CREATE TABLE products (
   product_disc ENUM('Applicable', 'No Discount') NOT NULL,
   product_f6_rate BOOLEAN NOT NULL,
   product_mfr_f3_list VARCHAR(15) NULL,
-  product_id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY
-);
+  company_id INT UNSIGNED NOT NULL,
+  supplier_id INT UNSIGNED NOT NULL,
+  product_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (product_id),
+  FOREIGN KEY (company_id) REFERENCES companies(company_id),
+  FOREIGN KEY (supplier_id) REFERENCES suppliers(supplier_id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
 CREATE TABLE stocks (
-  company_id INT UNSIGNED NOT NULL,
   product_id INT UNSIGNED NOT NULL,
   product_qty INT UNSIGNED NOT NULL,
-  stock_id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY
-);
-
-CREATE TABLE customers (
-  customer_name VARCHAR(30) NOT NULL,
-  customer_address VARCHAR(300) NOT NULL,
-  customer_phone VARCHAR(10) NOT NULL,
-  customer_gstin CHAR(15) NOT NULL,
-  customer_id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY
-);
-
-CREATE TABLE suppliers (
-  supplier_name VARCHAR(30) NOT NULL,
-  supplier_address VARCHAR(300) NOT NULL,
-  supplier_phone VARCHAR(10) NOT NULL,
-  supplier_gstin CHAR(15) NOT NULL,
-  supplier_id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY
-);
+  stock_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (stock_id),
+  FOREIGN KEY (product_id) REFERENCES products(product_id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;
 
 CREATE TABLE orders (
-  company_id INT UNSIGNED NOT NULL,
   customer_id INT UNSIGNED NOT NULL,
   product_id INT UNSIGNED NOT NULL,
   product_qty_sold INT UNSIGNED NOT NULL,
   product_price FLOAT UNSIGNED NOT NULL,
   product_tax FLOAT UNSIGNED NOT NULL,
   order_time TIMESTAMP NOT NULL,
-  order_id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY
-);
+  order_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (order_id),
+  FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
+  FOREIGN KEY (product_id) REFERENCES products(product_id)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8;
