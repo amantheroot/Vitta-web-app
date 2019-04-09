@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 
+import {Link} from "react-router-dom";
+
 import keygen from "../../assets/keygen";
 
 const mapStateToProps = store => {
@@ -36,7 +38,7 @@ class toConnectHomePage extends Component {
           <div>
             <label>Search: </label><input type="text" onChange={this.changeFilter} />
           </div>
-          <button>Create New</button>
+          <Link to="/createcompany"><button>Create New</button></Link>
         </div>
       </div>
     );

@@ -12,6 +12,7 @@ import {fetchOrders} from "./actions/ordersActions";
 import Layout from "./components/layout";
 
 import HomePage from "./components/pages/homePage";
+import CreateCompany from "./components/pages/createCompany";
 
 const mapStateToProps = store => {
   return {
@@ -50,6 +51,7 @@ class toConnectApp extends Component {
         <Layout>
           <Switch>
             <Route path="/" component={HomePage} exact />
+            <Route path="/createcompany" component={CreateCompany} />
           </Switch>
         </Layout>
       </BrowserRouter>

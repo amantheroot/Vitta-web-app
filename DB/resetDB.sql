@@ -31,6 +31,8 @@ CREATE TABLE companies (
   company_financial_year_start DATE NOT NULL,
   company_financial_year_end DATE NOT NULL,
   company_data_dir VARCHAR(100) NOT NULL,
+  company_reg VARCHAR(30) NOT NULL,
+  company_valuation VARCHAR(30) NOT NULL,
   company_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (company_id)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8;
