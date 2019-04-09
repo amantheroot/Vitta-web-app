@@ -18,16 +18,16 @@ class CreateCompany extends Component {
             <input id="company_name" type="text" name="company_name" required />
           </div>
           <div>
-            <label htmlFor="comapny_address">Address:</label>
-            <textarea id="comapny_address" type="text" name="comapny_address" rows="3" required />
+            <label htmlFor="company_address">Address:</label>
+            <textarea id="company_address" type="text" name="company_address" rows="3" required />
           </div>
           <div>
             <label htmlFor="company_phone">Phone:</label>
             <input id="company_phone" type="text" name="company_phone" required />
           </div>
           <div>
-            <label htmlFor="comapny_branch_code">Branch Code:</label>
-            <input id="comapny_branch_code" type="text" name="comapny_branch_code" required />
+            <label htmlFor="company_branch_code">Branch Code:</label>
+            <input id="company_branch_code" type="text" name="company_branch_code" required />
           </div>
           <div>
             <label htmlFor="company_fax_no">Fax No.:</label>
@@ -362,7 +362,7 @@ class CreateCompany extends Component {
           </div>
           <div>
             <label htmlFor="company_data_dir">Data Directory:</label>
-            <input id="company_data_dir" type="text" name="company_data_dir" />
+            <input id="company_data_dir" type="text" name="company_data_dir" required />
           </div>
           <div>
             <label htmlFor="company_reg">Registration:</label>

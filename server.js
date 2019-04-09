@@ -77,8 +77,29 @@ app.get('/api/data', (req, res) => {
   });
 });
 
+const handleFormData = data => {
+  let dataClone = JSON.parse(JSON.stringify(data));
+  Object.keys(dataClone).forEach(key => {
+    if (dataClone[key] === '') {
+      dataClone[key] = 'NULL';
+    } else if (key === 'company_financial_year_start' || key === 'company_financial_year_end') {
+      const datearr = dataClone[key].split('/');
+      dataClone[key] = `'${datearr[2]}-${datearr[1]}-${datearr[0]}'`;
+    } else {
+      dataClone[key] = `'${dataClone[key]}'`;
+    }
+  });
+  return dataClone;
+};
+
 app.post('/api/form', (req, res) => {
-  console.log(req.body);
+  const formBody = handleFormData(req.body);
+
+  const query = `INSERT INTO companies (${Object.keys(formBody).join(',')}) VALUES (${Object.values(formBody).join(',')})`;
+
+  connection.query(query, (err,rows,fields) => {
+    if (err) throw err;
+  });
   res.redirect('/');
   res.end();
 });

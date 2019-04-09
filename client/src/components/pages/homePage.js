@@ -22,7 +22,7 @@ class toConnectHomePage extends Component {
 
   filterCompanies = (companies) => {
     const regex = new RegExp(this.state.filter, 'gi');
-    return companies.filter(comp => comp.name.match(regex))
+    return companies.filter(comp => comp.company_name.match(regex))
   }
 
   render() {
